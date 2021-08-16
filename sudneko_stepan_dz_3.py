@@ -25,5 +25,3 @@ def currency_rates(val):
 
 
 
-if __name__ == '__main__':
-    currency_rates('TT')
