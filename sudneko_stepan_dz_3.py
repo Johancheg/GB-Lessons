@@ -1,20 +1,31 @@
-class Worker:
-    my_dict = {
-        'wage': 20000,
-        'bonus': 15000
-    }
-    def __init__(self, name, surname, position):
+class Cell:
+    def __init__(self, nums):
+        self.nums = nums
 
-        self.name = name
-        self.surname = surname
-        self.position = position
-        self._income = self.my_dict['wage'], self.my_dict['bonus']
+    def make_order(self, rows):
+        return '\n'.join(['*' * rows for _ in range(self.nums // rows)]) \
+               + '\n' + '*' * (self.nums % rows)
 
-class Position(Worker):
-    def get_full_name(self):
-        return print(f'Фамилия:{self.surname} Имя:{self.name}')
-    def get_total_income(self):
-        return print(f'Оклад и бонус: {self._income}')
+    def __str__(self):
+        return str(self.nums)
 
-Position('St', 'TS', 'Cheif').get_full_name()
-Position('St', 'TS', 'Cheif').get_total_income()
+    def __add__(self, other):
+        return 'Сумма клеток равна ' + str(self.nums + other.nums)
+        # return Cell(self.nums + other.nums)
+
+    def __sub__(self, other):
+        return self.nums - other.nums if self.nums - other.nums > 0 \
+            else 'Клетка не может быть меньше нуля!'
+
+    def __mul__(self, other):
+        return 'Умножение клеток равно  ' + str(self.nums * other.nums)
+
+    def __truediv__(self, other):
+        return 'Деление клеток равно ' + str(round(self.nums / other.nums))
+
+
+cell_1 = Cell(10)
+cell_2 = Cell(34)
+print(cell_1)
+print(cell_1 - cell_2)
+print(cell_2.make_order(10))

@@ -1,13 +1,30 @@
-class Road:
-    def __init__(self, length, width):
-        self.__road_len = int(length)
-        self.__road_len_width = int(width)
+from abc import ABC, abstractmethod
 
-    def road_calculate(self):
-        weight = 25
-        thickness = 5
-        result = (self.__road_len * self.__road_len_width * weight * thickness) * 0.001
-        return int(result)
 
-road1 = Road(20,5000)
-print(road1.road_calculate())
+class Clothes(ABC):
+    def __init__(self, param):
+        self.param = param
+
+    @abstractmethod
+    def calculate(self):
+        pass
+
+
+class Coat(Clothes):
+
+    @property
+    def calculate(self):
+        return round((self.param / 6.5) + 0.5)
+
+
+class Suit(Clothes):
+
+    @property
+    def calculate(self):
+        return round((2 * self.param) + 0.3)
+
+
+coat = Coat(65)
+suit = Suit(200)
+print(coat.calculate)
+print(suit.calculate)
